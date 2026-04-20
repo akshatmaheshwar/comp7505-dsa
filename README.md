@@ -1,4 +1,4 @@
-# COMP3506 — Data Structures and Algorithms
+# COMP7505 — Data Structures and Algorithms
 
 Two assignments from COMP3506/7505 at UQ implementing core data structures and algorithms from scratch in Python.
 
