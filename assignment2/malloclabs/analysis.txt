@@ -1,0 +1,46 @@
+----
+NOTE: This file is not mandatory for COMP3506 students, but we do encourage
+you to have a go at these questions anyway. COMP7505 students, this component
+is worth 2 marks, so your total A1 is worth 17 marks.
+----
+
+Question 1: Briefly describe, in two or three sentences, how your data
+structure works, including any variables or data maintained internally.
+This should take about four sentences.
+
+Answer:
+
+    Basically the datastructure internally uses, 2 dynamic arrays to store kmers and number of occurrences of each kmer
+    and a list to store count of similar compatible kmers(same first 2 characters). Thus, kmers and their number
+    of occurrences and count of similar kmers that will be compatible with their complement are managed efficiently.
+    Thus, inserting and deleting kmers as a batch, kmers having greater than or equal to specific frequency, number
+    of times a specific kmer occurs and number of kmers that are lexicographically greater than specific kmer
+    and number of compatible kmers to specific kmer can be obtained efficiently.
+
+Question 2: What is the worst-case time complexity for supporting the
+`countgeq` query, and does this differ to the worst-case time complexity
+for the `count` query? If so, how? Explain.
+This should take about five sentences.
+
+Answer:
+
+    countgeq() method uses O(1) to find the index of the prefix_array that has similar kmers having first
+    2 characters equal and O(16) worst time complexity to traverse the array and find the sum of the count.
+    And then uses binary search O(log n) to find the kmer in kmers_list and there it uses another traversal
+    backwards to subtract the same first 2 characters but lexicographically smaller kmers counts and this has
+    O(n) worstcase time complexity. So the worst case time complexity is O(1) + O(16) + O(log n) + O(n) = O(n).
+    Whereas the count() method just uses the binary search with time complexity O(log n) to find the element.
+
+Question 3: What is the worst-case time complexity for supporting the
+`compatible` query type? Explain how the query is solved along with your
+analysis.
+This should take about five sentences. Your analysis can be in plain English.
+
+Answer:
+    compatible() method's worst case time complexity is O(1) as it just uses left shift operator to append 2 bits
+    and another left shift operator to find the complement of the bits in the process of finding count of compatible
+    kmers. Basically A,C,G,T are converted to 00, 01, 10, 11 bits and appended to get a single integer which is
+    used as the index to store the count of the similar kmers having same first 2 characters. As mentioned in the
+    description A is the complement of T and C is the complement of G. Using this we just find the complement of
+    the last two characters of the kmer provided to find the index of the prefix_array where the count of the
+    compatible kmers are present.
